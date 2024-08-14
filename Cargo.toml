@@ -1,0 +1,9 @@
+[package]
+name = "vim-robot"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+palette = "0.7"
+rgb2ansi256 = "0.1"
