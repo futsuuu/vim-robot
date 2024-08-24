@@ -43,6 +43,11 @@ hi! DiagnosticHint guifg=#436fbc guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticInfo guifg=#008784 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticWarn guifg=#8a6e00 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticError guifg=#ab4c6e guibg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! DiagnosticUnderlineOk guifg=NONE guibg=NONE guisp=#288546 gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineHint guifg=NONE guibg=NONE guisp=#436fbc gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineInfo guifg=NONE guibg=NONE guisp=#008784 gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineWarn guifg=NONE guibg=NONE guisp=#8a6e00 gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineError guifg=NONE guibg=NONE guisp=#ab4c6e gui=undercurl cterm=undercurl
 hi! DiagnosticVirtualTextOk guifg=#288546 guibg=#e3ebe5 guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticVirtualTextHint guifg=#436fbc guibg=#e4e9f1 guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticVirtualTextInfo guifg=#008784 guibg=#e0ebeb guisp=NONE gui=NONE cterm=NONE
@@ -71,8 +76,10 @@ hi! @keyword.exception guifg=#7c8597 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! @keyword.conditional.ternary guifg=#7c8597 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! link @constructor Function
 hi! link @constructor.lua Delimiter
-hi! @string.special.url guifg=#436fbc guibg=NONE guisp=NONE gui=underdashed cterm=underdashed
+hi! @string.special.url guifg=#436fbc guibg=NONE guisp=NONE gui=underline cterm=underline
 hi! @markup.link guifg=#436fbc guibg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! @markup.link.label guifg=#436fbc guibg=NONE guisp=NONE gui=underdashed cterm=underdashed
+hi! link @markup.link.url @string.special.url
 hi! @markup.quote guifg=#7c8597 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! link TelescopeNormal NormalFloat
 hi! link TelescopeTitle FloatTitle
@@ -114,6 +121,11 @@ hi! DiagnosticHint guifg=#709eef guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticInfo guifg=#00b8b3 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticWarn guifg=#b99d2b guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticError guifg=#df7a9b guibg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! DiagnosticUnderlineOk guifg=NONE guibg=NONE guisp=#5cb572 gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineHint guifg=NONE guibg=NONE guisp=#709eef gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineInfo guifg=NONE guibg=NONE guisp=#00b8b3 gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineWarn guifg=NONE guibg=NONE guisp=#b99d2b gui=undercurl cterm=undercurl
+hi! DiagnosticUnderlineError guifg=NONE guibg=NONE guisp=#df7a9b gui=undercurl cterm=undercurl
 hi! DiagnosticVirtualTextOk guifg=#5cb572 guibg=#293233 guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticVirtualTextHint guifg=#709eef guibg=#2a303c guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticVirtualTextInfo guifg=#00b8b3 guibg=#263237 guisp=NONE gui=NONE cterm=NONE
@@ -142,8 +154,10 @@ hi! @keyword.exception guifg=#828a9a guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! @keyword.conditional.ternary guifg=#828a9a guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! link @constructor Function
 hi! link @constructor.lua Delimiter
-hi! @string.special.url guifg=#709eef guibg=NONE guisp=NONE gui=underdashed cterm=underdashed
+hi! @string.special.url guifg=#709eef guibg=NONE guisp=NONE gui=underline cterm=underline
 hi! @markup.link guifg=#709eef guibg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! @markup.link.label guifg=#709eef guibg=NONE guisp=NONE gui=underdashed cterm=underdashed
+hi! link @markup.link.url @string.special.url
 hi! @markup.quote guifg=#828a9a guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! link TelescopeNormal NormalFloat
 hi! link TelescopeTitle FloatTitle

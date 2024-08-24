@@ -152,6 +152,11 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("DiagnosticInfo").fg(info),
         hl("DiagnosticWarn").fg(warn),
         hl("DiagnosticError").fg(error),
+        hl("DiagnosticUnderlineOk").sp(ok).undercurl(),
+        hl("DiagnosticUnderlineHint").sp(hint).undercurl(),
+        hl("DiagnosticUnderlineInfo").sp(info).undercurl(),
+        hl("DiagnosticUnderlineWarn").sp(warn).undercurl(),
+        hl("DiagnosticUnderlineError").sp(error).undercurl(),
         hl("DiagnosticVirtualTextOk").fg(ok).bg(mix(bg, ok, a_diag_vt)),
         hl("DiagnosticVirtualTextHint").fg(hint).bg(mix(bg, hint, a_diag_vt)),
         hl("DiagnosticVirtualTextInfo").fg(info).bg(mix(bg, info, a_diag_vt)),
@@ -192,8 +197,10 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("@keyword.conditional.ternary").fg(gray2),
         hl("@constructor").link("Function"),
         hl("@constructor.lua").link("Delimiter"),
-        hl("@string.special.url").fg(blue1).underdashed(),
+        hl("@string.special.url").fg(blue1).underline(),
         hl("@markup.link").fg(blue1),
+        hl("@markup.link.label").fg(blue1).underdashed(),
+        hl("@markup.link.url").link("@string.special.url"),
         hl("@markup.quote").fg(gray2),
     ]);
 
@@ -250,12 +257,24 @@ impl<'a> Highlight<'a> {
         self.bg = Some(c);
         self
     }
+    fn sp(mut self, c: Oklch) -> Self {
+        self.sp = Some(c);
+        self
+    }
     fn bold(mut self) -> Self {
         self.bold = true;
         self
     }
     fn italic(mut self) -> Self {
         self.italic = true;
+        self
+    }
+    fn underline(mut self) -> Self {
+        self.underline = true;
+        self
+    }
+    fn undercurl(mut self) -> Self {
+        self.undercurl = true;
         self
     }
     fn underdashed(mut self) -> Self {
