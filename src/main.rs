@@ -44,6 +44,11 @@ fn to_hex(color: Oklch) -> String {
     format!("#{:x}", Srgb::from_color(color).into_format::<u8>())
 }
 
+fn to_ansi256(color: Oklch) -> String {
+    let rgb = Srgb::from_color(color).into_format::<u8>();
+    format!("{}", rgb2ansi256::rgb_to_ansi256(rgb.red, rgb.green, rgb.blue))
+}
+
 fn mix(base: Oklch, other: Oklch, alpha: f32) -> Oklch {
     let base = Oklab::from_color(base);
     let other = Oklab::from_color(other);
@@ -92,6 +97,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     let magenta1 = red1.with_hue(310.);
     let magenta2 = red2.with_hue(310.);
 
+    // syntax highlight
     r.extend([
         hl("Comment").fg(gray3),
         hl("String").fg(gray1),
@@ -107,29 +113,30 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("Title").fg(blue2).bold(),
     ]);
 
-    r.extend([
-        hl("StatusLine").fg(gray1).bg(bg),
-        hl("WinBar").fg(gray1).bg(bg),
-        hl("WinSeparator").fg(gray4),
-    ]);
-
+    // alpha
     let a_cursorline = 0.05;
     let a_diag_vt = 0.09;
     let a_matchword = 0.12;
     let a_visual = 0.16;
     let a_search = 0.28;
 
+    // ui
     r.extend([
         hl("LineNr").fg(gray4),
         hl("CursorLineNr").fg(gray3).bold(),
         hl("Whitespace").fg(gray4),
         hl("CursorLine").bg(mix(bg, fg, a_cursorline)),
         hl("CursorColumn").link("CursorLine"),
+        hl("StatusLine").fg(gray1).bg(bg),
+        hl("WinBar").fg(gray1).bg(bg),
+        hl("WinSeparator").fg(gray4),
         hl("Visual").bg(mix(bg, blue2, a_visual)),
         hl("Search").bg(mix(bg, blue1, a_search)),
         hl("CurSearch").bg(blue1).fg(bg).bold(),
+        hl("Directory").fg(blue2),
     ]);
 
+    // floating window
     r.extend([
         hl("NormalFloat").bg(bg.mix(fg, 0.04)),
         hl("FloatBorder").bg(bg.mix(fg, 0.018)).fg(bg.mix(fg, 0.5)),
@@ -138,12 +145,12 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("PmenuSel").link("Visual"),
     ]);
 
+    // diagnostics
     let ok = green1;
     let hint = blue1;
     let info = cyan1;
     let warn = yellow1;
     let error = red1;
-
     r.extend([
         hl("Error").fg(error).bold(),
         hl("ErrorMsg").fg(error).bold(),
@@ -164,13 +171,15 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("DiagnosticVirtualTextError").fg(error).bg(mix(bg, error, a_diag_vt)),
     ]);
 
+    // match word
     r.extend([
-        hl("MatchParen").fg(fg).bg(gray4).bold(),
+        hl("MatchParen").fg(fg).bg(mix(bg, fg, a_matchword)).bold(),
         hl("IlluminatedWordText").bg(mix(bg, fg, a_matchword)),
         hl("IlluminatedWordRead").link("IlluminatedWordText"),
         hl("IlluminatedWordWrite").link("IlluminatedWordText"),
     ]);
 
+    // diff
     r.extend([
         hl("Added").fg(green1),
         hl("Removed").fg(red1),
@@ -183,14 +192,13 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("GitSignsChangeInline").bg(mix(bg, green1, 0.3)),
     ]);
 
+    // tree-sitter
     r.extend([
         hl("@attribute.builtin").link("@attribute"),
         hl("@constant.builtin").link("@constant"),
         hl("@function.builtin").link("@function"),
         hl("@type.builtin").link("@type"),
-    ]);
 
-    r.extend([
         hl("@variable").fg(fg),
         hl("@keyword.vim").link("Function"),
         hl("@keyword.exception").fg(gray2),
@@ -204,6 +212,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("@markup.quote").fg(gray2),
     ]);
 
+    // telescope.nvim
     r.extend([
         hl("TelescopeNormal").link("NormalFloat"),
         hl("TelescopeTitle").link("FloatTitle"),
@@ -295,7 +304,9 @@ impl Display for Highlight<'_> {
 
         write!(f, "hi! {}", self.name)?;
         write!(f, " guifg={}", self.fg.map(to_hex).unwrap_or("NONE".into()))?;
+        write!(f, " ctermfg={}", self.fg.map(to_ansi256).unwrap_or("NONE".into()))?;
         write!(f, " guibg={}", self.bg.map(to_hex).unwrap_or("NONE".into()))?;
+        write!(f, " ctermbg={}", self.bg.map(to_ansi256).unwrap_or("NONE".into()))?;
         write!(f, " guisp={}", self.sp.map(to_hex).unwrap_or("NONE".into()))?;
 
         let mut attr = Vec::new();
