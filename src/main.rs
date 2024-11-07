@@ -61,12 +61,12 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     let white = if light {
         Oklch::new(0.97, 0.001, 264.)
     } else {
-        Oklch::new(0.76, 0.030, 264.)
+        Oklch::new(0.79, 0.037, 264.)
     };
     let black = if light {
-        Oklch::new(0.49, 0.040, 264.)
+        Oklch::new(0.54, 0.060, 264.)
     } else {
-        Oklch::new(0.27, 0.012, 264.)
+        Oklch::new(0.27, 0.024, 264.)
     };
     println!("{}", Srgb::from_color(white).relative_contrast(Srgb::from_color(black)));
 
@@ -75,21 +75,21 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
 
     r.push(hl("Normal").fg(fg).bg(bg));
 
-    let gray1 = mix(fg, bg, 0.12);
+    let gray1 = mix(fg, bg, 0.20);
     let gray2 = mix(fg, bg, 0.26); // keyword
     let gray3 = mix(fg, bg, 0.44); // delimiter, comment
     let gray4 = mix(fg, bg, 0.80); // decoration
 
     let red1 = Oklch {
         l: gray1.l,
-        chroma: 0.13,
+        chroma: 0.15,
         hue: (0.).into(),
     };
     let red2 = Oklch { chroma: 0.07, ..red1 };
     let yellow1 = red1.with_hue(94.);
     let yellow2 = red2.with_hue(94.);
-    let green1 = red1.with_hue(150.);
-    let green2 = red2.with_hue(150.);
+    let green1 = red1.with_hue(137.);
+    let green2 = red2.with_hue(137.);
     let cyan1 = red1.with_hue(192.);
     let cyan2 = red2.with_hue(192.);
     let blue1 = red1.with_hue(261.);
@@ -100,14 +100,15 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     // syntax highlight
     r.extend([
         hl("Comment").fg(gray3),
-        hl("String").fg(gray1),
-        hl("Constant").fg(blue2),
+        hl("String").fg(green1),
+        hl("Character").link("String"),
+        hl("Constant").fg(yellow1),
         hl("Identifier").fg(fg),
         hl("Function").fg(blue1),
-        hl("Statement").fg(gray2).italic(),
+        hl("Statement").fg(red1).italic(),
         hl("Operator").fg(gray3),
         hl("Delimiter").link("Operator"),
-        hl("Type").fg(cyan2),
+        hl("Type").fg(cyan1),
         hl("Special").fg(fg),
         hl("PreProc").fg(fg),
         hl("Title").fg(blue2).bold(),
@@ -134,6 +135,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("Search").bg(mix(bg, blue1, a_search)),
         hl("CurSearch").bg(blue1).fg(bg).bold(),
         hl("Directory").fg(blue2),
+        hl("Question").fg(blue2),
     ]);
 
     // floating window
@@ -187,6 +189,9 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("DiffAdd").bg(mix(bg, green1, 0.15)),
         hl("DiffDelete").bg(mix(bg, red1, 0.15)),
         hl("DiffChange").bg(mix(bg, blue1, 0.15)),
+        hl("GitSignsStagedAdd").link("GitSignsAdd"),
+        hl("GitSignsStagedChange").link("GitSignsChange"),
+        hl("GitSignsStagedDelete").link("GitSignsDelete"),
         hl("GitSignsAddInline").bg(mix(bg, green1, 0.3)),
         hl("GitSignsDeleteInline").bg(mix(bg, red1, 0.3)),
         hl("GitSignsChangeInline").bg(mix(bg, green1, 0.3)),
@@ -199,7 +204,9 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("@function.builtin").link("@function"),
         hl("@type.builtin").link("@type"),
 
+        hl("@property").fg(magenta1),
         hl("@variable").fg(fg),
+        hl("@variable.member").link("@property"),
         hl("@keyword.vim").link("Function"),
         hl("@keyword.exception").fg(gray2),
         hl("@keyword.conditional.ternary").fg(gray2),
@@ -217,6 +224,19 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("TelescopeNormal").link("NormalFloat"),
         hl("TelescopeTitle").link("FloatTitle"),
         hl("TelescopeBorder").link("FloatBorder"),
+    ]);
+
+    // nvim-cmp
+    r.extend([
+        hl("CmpItemKind").fg(magenta1),
+        hl("CmpItemKindConstant").link("Constant"),
+        hl("CmpItemKindEnum").link("Type"),
+        hl("CmpItemKindFunction").link("Function"),
+        hl("CmpItemKindInterface").link("Type"),
+        hl("CmpItemKindKeyword").link("Constant"),
+        hl("CmpItemKindMethod").link("Function"),
+        hl("CmpItemKindStruct").link("Type"),
+        hl("CmpItemKindText").link("Comment"),
     ]);
 
     r
