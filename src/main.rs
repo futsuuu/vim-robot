@@ -75,27 +75,27 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
 
     r.push(hl("Normal").fg(fg).bg(bg));
 
-    let gray1 = mix(fg, bg, 0.20);
-    let gray2 = mix(fg, bg, 0.26); // keyword
+    let gray1 = mix(fg, bg, 0.16);
+    let gray2 = mix(fg, bg, 0.26);
     let gray3 = mix(fg, bg, 0.44); // delimiter, comment
     let gray4 = mix(fg, bg, 0.80); // decoration
 
     let red1 = Oklch {
         l: gray1.l,
         chroma: 0.15,
-        hue: (0.).into(),
+        hue: (22.).into(),
     };
-    let red2 = Oklch { chroma: 0.07, ..red1 };
-    let yellow1 = red1.with_hue(94.);
-    let yellow2 = red2.with_hue(94.);
-    let green1 = red1.with_hue(137.);
-    let green2 = red2.with_hue(137.);
-    let cyan1 = red1.with_hue(192.);
-    let cyan2 = red2.with_hue(192.);
-    let blue1 = red1.with_hue(261.);
-    let blue2 = red2.with_hue(261.);
-    let magenta1 = red1.with_hue(310.);
-    let magenta2 = red2.with_hue(310.);
+    let red2 = Oklch { chroma: 0.09, ..red1 };
+    let yellow1 = red1.with_hue(83.);
+    let yellow2 = red2.with_hue(83.);
+    let green1 = red1.with_hue(132.);
+    let green2 = red2.with_hue(132.);
+    let cyan1 = red1.with_hue(197.);
+    let cyan2 = red2.with_hue(197.);
+    let blue1 = red1.with_hue(251.);
+    let blue2 = red2.with_hue(251.);
+    let magenta1 = red1.with_hue(294.);
+    let magenta2 = red2.with_hue(294.);
 
     // syntax highlight
     r.extend([
@@ -112,6 +112,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("Special").fg(fg),
         hl("PreProc").fg(fg),
         hl("Title").fg(blue2).bold(),
+        hl("Todo").bg(cyan1).fg(bg).bold(),
     ]);
 
     // alpha
@@ -135,14 +136,22 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("Search").bg(mix(bg, blue1, a_search)),
         hl("CurSearch").bg(blue1).fg(bg).bold(),
         hl("Directory").fg(blue2),
-        hl("Question").fg(blue2),
+        hl("MoreMsg").fg(blue2),
+        hl("Question").link("MoreMsg"),
+        hl("ModeMsg").fg(gray2),
     ]);
 
     // floating window
+    let float_bg = bg.mix(fg, 0.04);
+    let floatborder_bg = bg.mix(float_bg, 0.55);
+    let floatborder_fg = floatborder_bg.mix(fg, 0.4);
     r.extend([
-        hl("NormalFloat").bg(bg.mix(fg, 0.04)),
-        hl("FloatBorder").bg(bg.mix(fg, 0.018)).fg(bg.mix(fg, 0.5)),
-        hl("FloatTitle").link("FloatBorder"),
+        hl("NormalFloat").bg(float_bg),
+        hl("FloatBorder").bg(floatborder_bg).fg(floatborder_fg),
+        hl("FloatTitle")
+            .bg(floatborder_bg.mix(float_bg, 0.57))
+            .fg(floatborder_fg.mix(blue1, 0.2))
+            .bold(),
         hl("Pmenu").link("NormalFloat"),
         hl("PmenuSel").link("Visual"),
     ]);
@@ -156,6 +165,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     r.extend([
         hl("Error").fg(error).bold(),
         hl("ErrorMsg").fg(error).bold(),
+        hl("WarningMsg").fg(warn).bold(),
         hl("DiagnosticOk").fg(ok),
         hl("DiagnosticHint").fg(hint),
         hl("DiagnosticInfo").fg(info),
@@ -203,7 +213,6 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("@constant.builtin").link("@constant"),
         hl("@function.builtin").link("@function"),
         hl("@type.builtin").link("@type"),
-
         hl("@property").fg(magenta1),
         hl("@variable").fg(fg),
         hl("@variable.member").link("@property"),
@@ -221,6 +230,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
 
     // telescope.nvim
     r.extend([
+        hl("TelescopeMatching").fg(blue1).bold(),
         hl("TelescopeNormal").link("NormalFloat"),
         hl("TelescopeTitle").link("FloatTitle"),
         hl("TelescopeBorder").link("FloatBorder"),
@@ -228,6 +238,9 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
 
     // nvim-cmp
     r.extend([
+        hl("CmpItemAbbr").fg(gray1),
+        hl("CmpItemAbbrMatch").fg(blue1).bold(),
+        hl("CmpItemAbbrMatchFuzzy").fg(blue2),
         hl("CmpItemKind").fg(magenta1),
         hl("CmpItemKindConstant").link("Constant"),
         hl("CmpItemKindEnum").link("Type"),
