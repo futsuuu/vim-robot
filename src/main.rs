@@ -118,7 +118,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("Delimiter").link("Operator"),
         hl("Type").fg(cyan1),
         hl("Special").fg(fg),
-        hl("PreProc").fg(fg),
+        hl("PreProc").link("Statement"),
         hl("Title").fg(blue2).bold(),
         hl("Todo").bg(cyan1).fg(bg).bold(),
     ]);
@@ -244,6 +244,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("@markup.link.label").fg(blue1).underdashed(),
         hl("@markup.link.url").link("@string.special.url"),
         hl("@markup.quote").fg(gray2),
+        hl("@markup.raw").fg(magenta2),
     ]);
 
     // telescope.nvim

@@ -19,7 +19,7 @@ hi! Operator guifg=#9da8be ctermfg=248 guibg=NONE ctermbg=NONE guisp=NONE gui=NO
 hi! link Delimiter Operator
 hi! Type guifg=#009ca2 ctermfg=37 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! Special guifg=#5d6f92 ctermfg=60 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
-hi! PreProc guifg=#5d6f92 ctermfg=60 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! link PreProc Statement
 hi! Title guifg=#5986b7 ctermfg=67 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
 hi! Todo guifg=#f5f5f6 ctermfg=255 guibg=#009ca2 ctermbg=37 guisp=NONE gui=bold cterm=bold
 hi! LineNr guifg=#d4d9e2 ctermfg=253 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -93,6 +93,7 @@ hi! @markup.link guifg=#2f86d9 ctermfg=68 guibg=NONE ctermbg=NONE guisp=NONE gui
 hi! @markup.link.label guifg=#2f86d9 ctermfg=68 guibg=NONE ctermbg=NONE guisp=NONE gui=underdashed cterm=underdashed
 hi! link @markup.link.url @string.special.url
 hi! @markup.quote guifg=#8290ac ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! @markup.raw guifg=#8678b4 ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! TelescopeMatching guifg=#2f86d9 ctermfg=68 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
 hi! link TelescopeNormal NormalFloat
 hi! link TelescopeTitle FloatTitle
@@ -122,7 +123,7 @@ hi! Operator guifg=#6c7588 ctermfg=243 guibg=NONE ctermbg=NONE guisp=NONE gui=NO
 hi! link Delimiter Operator
 hi! Type guifg=#00bcc0 ctermfg=37 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! Special guifg=#afbbd3 ctermfg=146 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
-hi! PreProc guifg=#afbbd3 ctermfg=146 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! link PreProc Statement
 hi! Title guifg=#76a5d7 ctermfg=110 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
 hi! Todo guifg=#202632 ctermfg=235 guibg=#00bcc0 ctermbg=37 guisp=NONE gui=bold cterm=bold
 hi! LineNr guifg=#3a414f ctermfg=238 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -196,6 +197,7 @@ hi! @markup.link guifg=#50a5fa ctermfg=75 guibg=NONE ctermbg=NONE guisp=NONE gui
 hi! @markup.link.label guifg=#50a5fa ctermfg=75 guibg=NONE ctermbg=NONE guisp=NONE gui=underdashed cterm=underdashed
 hi! link @markup.link.url @string.special.url
 hi! @markup.quote guifg=#8691a6 ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! @markup.raw guifg=#a396d4 ctermfg=140 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! TelescopeMatching guifg=#50a5fa ctermfg=75 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
 hi! link TelescopeNormal NormalFloat
 hi! link TelescopeTitle FloatTitle
