@@ -1,0 +1,10 @@
+version: 2
+
+updates:
+  - package-ecosystem: cargo
+    groups:
+      deps:
+        patterns: ["*"]
+    directory: "/"
+    schedule:
+      interval: monthly
