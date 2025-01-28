@@ -1,25 +1,24 @@
-use std::{fmt::Display, fs, io::Write, path::Path};
-
-use anyhow::Result;
 use palette::{
-    blend::Compose, color_difference::Wcag21RelativeContrast, FromColor, Mix, Oklab, Oklch, Srgb, WithAlpha, WithHue,
+    blend::Compose, color_difference::Wcag21RelativeContrast, FromColor, Mix, WithAlpha, WithHue,
 };
+use palette::{Oklab, Oklch, Srgb};
 
-fn main() -> Result<()> {
-    let target = Path::new("colors/robot.vim");
-    fs::create_dir_all(target.parent().unwrap())?;
-    let mut file = fs::File::options()
-        .write(true)
-        .create(true)
-        .truncate(true)
-        .open(target)?;
-    file.write_all(generate_script().as_bytes())?;
+fn main() -> std::io::Result<()> {
+    let target = std::path::Path::new("colors/robot.vim");
+    std::fs::create_dir_all(target.parent().unwrap())?;
+    std::fs::write(target, generate_script().as_bytes())?;
     Ok(())
 }
 
 fn generate_script() -> String {
-    let light: String = get_highlights(true).iter().map(ToString::to_string).collect();
-    let dark: String = get_highlights(false).iter().map(ToString::to_string).collect();
+    let light: String = get_highlights(true)
+        .iter()
+        .map(ToString::to_string)
+        .collect();
+    let dark: String = get_highlights(false)
+        .iter()
+        .map(ToString::to_string)
+        .collect();
     format!(
         "\" do not edit manually!
 if exists('g:colors_name')
@@ -46,7 +45,10 @@ fn to_hex(color: Oklch) -> String {
 
 fn to_ansi256(color: Oklch) -> String {
     let rgb = Srgb::from_color(color).into_format::<u8>();
-    format!("{}", rgb2ansi256::rgb_to_ansi256(rgb.red, rgb.green, rgb.blue))
+    format!(
+        "{}",
+        rgb2ansi256::rgb_to_ansi256(rgb.red, rgb.green, rgb.blue)
+    )
 }
 
 fn mix(base: Oklch, other: Oklch, alpha: f32) -> Oklch {
@@ -68,7 +70,10 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     } else {
         Oklch::new(0.27, 0.024, 264.)
     };
-    println!("{}", Srgb::from_color(white).relative_contrast(Srgb::from_color(black)));
+    println!(
+        "{}",
+        Srgb::from_color(white).relative_contrast(Srgb::from_color(black))
+    );
 
     let fg = if light { black } else { white };
     let bg = if light { white } else { black };
@@ -85,7 +90,10 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         chroma: 0.15,
         hue: (22.).into(),
     };
-    let red2 = Oklch { chroma: 0.09, ..red1 };
+    let red2 = Oklch {
+        chroma: 0.09,
+        ..red1
+    };
     let yellow1 = red1.with_hue(83.);
     let yellow2 = red2.with_hue(83.);
     let green1 = red1.with_hue(132.);
@@ -176,11 +184,21 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
         hl("DiagnosticUnderlineInfo").sp(info).undercurl(),
         hl("DiagnosticUnderlineWarn").sp(warn).undercurl(),
         hl("DiagnosticUnderlineError").sp(error).undercurl(),
-        hl("DiagnosticVirtualTextOk").fg(ok).bg(mix(bg, ok, a_diag_vt)),
-        hl("DiagnosticVirtualTextHint").fg(hint).bg(mix(bg, hint, a_diag_vt)),
-        hl("DiagnosticVirtualTextInfo").fg(info).bg(mix(bg, info, a_diag_vt)),
-        hl("DiagnosticVirtualTextWarn").fg(warn).bg(mix(bg, warn, a_diag_vt)),
-        hl("DiagnosticVirtualTextError").fg(error).bg(mix(bg, error, a_diag_vt)),
+        hl("DiagnosticVirtualTextOk")
+            .fg(ok)
+            .bg(mix(bg, ok, a_diag_vt)),
+        hl("DiagnosticVirtualTextHint")
+            .fg(hint)
+            .bg(mix(bg, hint, a_diag_vt)),
+        hl("DiagnosticVirtualTextInfo")
+            .fg(info)
+            .bg(mix(bg, info, a_diag_vt)),
+        hl("DiagnosticVirtualTextWarn")
+            .fg(warn)
+            .bg(mix(bg, warn, a_diag_vt)),
+        hl("DiagnosticVirtualTextError")
+            .fg(error)
+            .bg(mix(bg, error, a_diag_vt)),
     ]);
 
     // match word
@@ -329,7 +347,7 @@ impl<'a> Highlight<'a> {
     }
 }
 
-impl Display for Highlight<'_> {
+impl std::fmt::Display for Highlight<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         if let Some(link) = self.link {
             return writeln!(f, "hi! link {} {link}", self.name);
@@ -337,9 +355,17 @@ impl Display for Highlight<'_> {
 
         write!(f, "hi! {}", self.name)?;
         write!(f, " guifg={}", self.fg.map(to_hex).unwrap_or("NONE".into()))?;
-        write!(f, " ctermfg={}", self.fg.map(to_ansi256).unwrap_or("NONE".into()))?;
+        write!(
+            f,
+            " ctermfg={}",
+            self.fg.map(to_ansi256).unwrap_or("NONE".into())
+        )?;
         write!(f, " guibg={}", self.bg.map(to_hex).unwrap_or("NONE".into()))?;
-        write!(f, " ctermbg={}", self.bg.map(to_ansi256).unwrap_or("NONE".into()))?;
+        write!(
+            f,
+            " ctermbg={}",
+            self.bg.map(to_ansi256).unwrap_or("NONE".into())
+        )?;
         write!(f, " guisp={}", self.sp.map(to_hex).unwrap_or("NONE".into()))?;
 
         let mut attr = Vec::new();
@@ -361,7 +387,11 @@ impl Display for Highlight<'_> {
         if self.underdashed {
             attr.push("underdashed");
         }
-        let attr = if attr.is_empty() { "NONE".into() } else { attr.join(",") };
+        let attr = if attr.is_empty() {
+            "NONE".into()
+        } else {
+            attr.join(",")
+        };
         write!(f, " gui={attr} cterm={attr}")?;
 
         writeln!(f)
