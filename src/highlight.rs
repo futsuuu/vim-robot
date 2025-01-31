@@ -72,56 +72,112 @@ impl<'a> Highlight<'a> {
         self.reverse = true;
         self
     }
+
+    pub fn display(&'a self, lua: bool) -> Display<'a> {
+        Display {
+            lua,
+            highlight: self,
+        }
+    }
 }
 
-impl std::fmt::Display for Highlight<'_> {
+pub struct Display<'a> {
+    lua: bool,
+    highlight: &'a Highlight<'a>,
+}
+
+impl std::fmt::Display for Display<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        if let Some(link) = self.link {
-            return writeln!(f, "hi! link {} {link}", self.name);
-        }
+        let h = &self.highlight;
+        if self.lua {
+            if let Some(link) = h.link {
+                return write!(
+                    f,
+                    "vim.api.nvim_set_hl(0, '{}', {{ force = true, link = '{link}' }})",
+                    h.name
+                );
+            }
 
-        write!(f, "hi! {}", self.name)?;
-        write!(f, " guifg={}", self.fg.map(to_hex).unwrap_or("NONE".into()))?;
-        write!(
-            f,
-            " ctermfg={}",
-            self.fg.map(to_ansi256).unwrap_or("NONE".into())
-        )?;
-        write!(f, " guibg={}", self.bg.map(to_hex).unwrap_or("NONE".into()))?;
-        write!(
-            f,
-            " ctermbg={}",
-            self.bg.map(to_ansi256).unwrap_or("NONE".into())
-        )?;
-        write!(f, " guisp={}", self.sp.map(to_hex).unwrap_or("NONE".into()))?;
-
-        let mut attr = Vec::new();
-        if self.bold {
-            attr.push("bold");
-        }
-        if self.italic {
-            attr.push("italic");
-        }
-        if self.reverse {
-            attr.push("reverse");
-        }
-        if self.underline {
-            attr.push("underline");
-        }
-        if self.undercurl {
-            attr.push("undercurl");
-        }
-        if self.underdashed {
-            attr.push("underdashed");
-        }
-        let attr = if attr.is_empty() {
-            "NONE".into()
+            let mut opts = Vec::new();
+            opts.push("force = true".into());
+            if let Some(fg) = h.fg {
+                opts.push(format!("fg = '{}'", to_hex(fg)));
+                opts.push(format!("ctermfg = {}", to_ansi256(fg)));
+            }
+            if let Some(bg) = h.bg {
+                opts.push(format!("bg = '{}'", to_hex(bg)));
+                opts.push(format!("ctermbg = {}", to_ansi256(bg)));
+            }
+            if let Some(sp) = h.sp {
+                opts.push(format!("sp = '{}'", to_hex(sp)));
+            }
+            if h.bold {
+                opts.push("bold = true".into());
+            }
+            if h.italic {
+                opts.push("italic = true".into());
+            }
+            if h.underline {
+                opts.push("underline = true".into());
+            }
+            if h.undercurl {
+                opts.push("undercurl = true".into());
+            }
+            if h.underdashed {
+                opts.push("underdashed = true".into());
+            }
+            write!(
+                f,
+                "vim.api.nvim_set_hl(0, '{}', {{ {} }})",
+                h.name,
+                opts.join(", ")
+            )
         } else {
-            attr.join(",")
-        };
-        write!(f, " gui={attr} cterm={attr}")?;
+            if let Some(link) = h.link {
+                return write!(f, "hi! link {} {link}", h.name);
+            }
 
-        writeln!(f)
+            write!(f, "hi! {}", h.name)?;
+            write!(f, " guifg={}", h.fg.map(to_hex).unwrap_or("NONE".into()))?;
+            write!(
+                f,
+                " ctermfg={}",
+                h.fg.map(to_ansi256).unwrap_or("NONE".into())
+            )?;
+            write!(f, " guibg={}", h.bg.map(to_hex).unwrap_or("NONE".into()))?;
+            write!(
+                f,
+                " ctermbg={}",
+                h.bg.map(to_ansi256).unwrap_or("NONE".into())
+            )?;
+            write!(f, " guisp={}", h.sp.map(to_hex).unwrap_or("NONE".into()))?;
+
+            let mut attr = Vec::new();
+            if h.bold {
+                attr.push("bold");
+            }
+            if h.italic {
+                attr.push("italic");
+            }
+            if h.reverse {
+                attr.push("reverse");
+            }
+            if h.underline {
+                attr.push("underline");
+            }
+            if h.undercurl {
+                attr.push("undercurl");
+            }
+            if h.underdashed {
+                attr.push("underdashed");
+            }
+            let attr = if attr.is_empty() {
+                "NONE".into()
+            } else {
+                attr.join(",")
+            };
+            write!(f, " gui={attr} cterm={attr}")
+        }
     }
 }
 

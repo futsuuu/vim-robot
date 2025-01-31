@@ -1,37 +1,28 @@
 use palette::{FromColor, Oklch, Srgb, WithHue};
 
-use vim_robot::Highlight;
+use vim_robot::{Highlight, Theme};
 
 fn main() -> std::io::Result<()> {
-    let target = std::path::Path::new("colors/robot.vim");
-    std::fs::create_dir_all(target.parent().unwrap())?;
-    std::fs::write(target, generate_script().as_bytes())?;
+    for p in ["autoload/robot", "lua/robot"] {
+        std::fs::create_dir_all(p)?;
+    }
+    for light in [true, false] {
+        for neovim in [true, false] {
+            let path = format!(
+                "{}/robot/{}.{}",
+                if neovim { "lua" } else { "autoload" },
+                if light { "light" } else { "dark" },
+                if neovim { "lua" } else { "vim" }
+            );
+            let contents = format!(
+                "{} do not edit manually!\n{}",
+                if neovim { "--" } else { "\"" },
+                create_theme(light, neovim)
+            );
+            std::fs::write(path, contents)?;
+        }
+    }
     Ok(())
-}
-
-fn generate_script() -> String {
-    let light: String = get_highlights(true)
-        .iter()
-        .map(ToString::to_string)
-        .collect();
-    let dark: String = get_highlights(false)
-        .iter()
-        .map(ToString::to_string)
-        .collect();
-    format!(
-        "\" do not edit manually!
-if exists('g:colors_name')
-  hi clear
-endif
-if exists('g:syntax_on')
-  syn reset
-endif
-let g:colors_name = 'robot'
-if &bg == 'light'
-{light}else
-{dark}endif
-"
-    )
 }
 
 fn hl(name: &str) -> Highlight {
@@ -45,8 +36,8 @@ fn mix(base: Oklch, other: Oklch, alpha: f32) -> Oklch {
     Oklch::from_color(other.with_alpha(alpha).over(base.opaque()).color)
 }
 
-fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
-    let mut r = Vec::new();
+fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
+    let mut t = Theme::new(light, neovim);
 
     let white = if light {
         Oklch::new(0.97, 0.001, 264.)
@@ -69,7 +60,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     let fg = if light { black } else { white };
     let bg = if light { white } else { black };
 
-    r.push(hl("Normal").fg(fg).bg(bg));
+    t.push(hl("Normal").fg(fg).bg(bg));
 
     let gray1 = mix(fg, bg, 0.16);
     let gray2 = mix(fg, bg, 0.26);
@@ -97,7 +88,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     let magenta2 = red2.with_hue(294.);
 
     // syntax highlight
-    r.extend([
+    t.extend([
         hl("Comment").fg(gray3),
         hl("String").fg(green1),
         hl("Character").link("String"),
@@ -122,7 +113,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     let a_search = 0.28;
 
     // ui
-    r.extend([
+    t.extend([
         hl("LineNr").fg(gray4),
         hl("CursorLineNr").fg(gray3).bold(),
         hl("Whitespace").fg(gray4),
@@ -144,7 +135,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     let float_bg = mix(bg, fg, 0.04);
     let floatborder_bg = mix(bg, float_bg, 0.55);
     let floatborder_fg = mix(floatborder_bg, fg, 0.4);
-    r.extend([
+    t.extend([
         hl("NormalFloat").bg(float_bg),
         hl("FloatBorder").bg(floatborder_bg).fg(floatborder_fg),
         hl("FloatTitle")
@@ -161,7 +152,7 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     let info = cyan1;
     let warn = yellow1;
     let error = red1;
-    r.extend([
+    t.extend([
         hl("Error").fg(error).bold(),
         hl("ErrorMsg").fg(error).bold(),
         hl("WarningMsg").fg(warn).bold(),
@@ -193,74 +184,82 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     ]);
 
     // match word
-    r.extend([
-        hl("MatchParen").fg(fg).bg(mix(bg, fg, a_matchword)).bold(),
-        hl("IlluminatedWordText").bg(mix(bg, fg, a_matchword)),
-        hl("IlluminatedWordRead").link("IlluminatedWordText"),
-        hl("IlluminatedWordWrite").link("IlluminatedWordText"),
-    ]);
+    t.push(hl("MatchParen").fg(fg).bg(mix(bg, fg, a_matchword)).bold());
+    if neovim {
+        t.extend([
+            hl("IlluminatedWordText").bg(mix(bg, fg, a_matchword)),
+            hl("IlluminatedWordRead").link("IlluminatedWordText"),
+            hl("IlluminatedWordWrite").link("IlluminatedWordText"),
+        ]);
+    }
 
     // diff
-    r.extend([
+    t.extend([
         hl("Added").fg(green1),
         hl("Removed").fg(red1),
         hl("Changed").fg(blue1),
         hl("DiffAdd").bg(mix(bg, green1, 0.15)),
         hl("DiffDelete").bg(mix(bg, red1, 0.15)),
         hl("DiffChange").bg(mix(bg, blue1, 0.15)),
-        hl("GitSignsStagedAdd").link("GitSignsAdd"),
-        hl("GitSignsStagedChange").link("GitSignsChange"),
-        hl("GitSignsStagedDelete").link("GitSignsDelete"),
-        hl("GitSignsAddInline").bg(mix(bg, green1, 0.3)),
-        hl("GitSignsDeleteInline").bg(mix(bg, red1, 0.3)),
-        hl("GitSignsChangeInline").bg(mix(bg, green1, 0.3)),
     ]);
+    if neovim {
+        t.extend([
+            hl("GitSignsStagedAdd").link("GitSignsAdd"),
+            hl("GitSignsStagedChange").link("GitSignsChange"),
+            hl("GitSignsStagedDelete").link("GitSignsDelete"),
+            hl("GitSignsAddInline").bg(mix(bg, green1, 0.3)),
+            hl("GitSignsDeleteInline").bg(mix(bg, red1, 0.3)),
+            hl("GitSignsChangeInline").bg(mix(bg, green1, 0.3)),
+        ]);
+    }
 
-    // tree-sitter
-    r.extend([
-        hl("@attribute.builtin").link("@attribute"),
-        hl("@constant.builtin").link("@constant"),
-        hl("@function.builtin").link("@function"),
-        hl("@type.builtin").link("@type"),
-        hl("@property").fg(magenta1),
-        hl("@variable").fg(fg),
-        hl("@variable.member").link("@property"),
-        hl("@keyword.vim").link("Function"),
-        hl("@keyword.exception").fg(gray2),
-        hl("@keyword.conditional.ternary").fg(gray2),
-        hl("@constructor").link("Function"),
-        hl("@constructor.lua").link("Delimiter"),
-        hl("@string.special.url").fg(blue1).underline(),
-        hl("@markup.link").fg(blue1),
-        hl("@markup.link.label").fg(blue1).underdashed(),
-        hl("@markup.link.url").link("@string.special.url"),
-        hl("@markup.quote").fg(gray2),
-        hl("@markup.raw").fg(magenta2),
-    ]);
+    if neovim {
+        // tree-sitter
+        t.extend([
+            hl("@attribute.builtin").link("@attribute"),
+            hl("@constant.builtin").link("@constant"),
+            hl("@function.builtin").link("@function"),
+            hl("@type.builtin").link("@type"),
+            hl("@property").fg(magenta1),
+            hl("@variable").fg(fg),
+            hl("@variable.member").link("@property"),
+            hl("@keyword.vim").link("Function"),
+            hl("@keyword.exception").fg(gray2),
+            hl("@keyword.conditional.ternary").fg(gray2),
+            hl("@constructor").link("Function"),
+            hl("@constructor.lua").link("Delimiter"),
+            hl("@string.special.url").fg(blue1).underline(),
+            hl("@markup.link").fg(blue1),
+            hl("@markup.link.label").fg(blue1).underdashed(),
+            hl("@markup.link.url").link("@string.special.url"),
+            hl("@markup.quote").fg(gray2),
+            hl("@markup.raw").fg(magenta2),
+        ]);
 
-    // telescope.nvim
-    r.extend([
-        hl("TelescopeMatching").fg(blue1).bold(),
-        hl("TelescopeNormal").link("NormalFloat"),
-        hl("TelescopeTitle").link("FloatTitle"),
-        hl("TelescopeBorder").link("FloatBorder"),
-    ]);
+        // telescope.nvim
+        t.extend([
+            hl("TelescopeMatching").fg(blue1).bold(),
+            hl("TelescopeNormal").link("NormalFloat"),
+            hl("TelescopeTitle").link("FloatTitle"),
+            hl("TelescopeBorder").link("FloatBorder"),
+        ]);
 
-    // nvim-cmp
-    r.extend([
-        hl("CmpItemAbbr").fg(gray1),
-        hl("CmpItemAbbrMatch").fg(blue1).bold(),
-        hl("CmpItemAbbrMatchFuzzy").fg(blue2),
-        hl("CmpItemKind").fg(magenta1),
-        hl("CmpItemKindConstant").link("Constant"),
-        hl("CmpItemKindEnum").link("Type"),
-        hl("CmpItemKindFunction").link("Function"),
-        hl("CmpItemKindInterface").link("Type"),
-        hl("CmpItemKindKeyword").link("Constant"),
-        hl("CmpItemKindMethod").link("Function"),
-        hl("CmpItemKindStruct").link("Type"),
-        hl("CmpItemKindText").link("Comment"),
-    ]);
+        // nvim-cmp
+        t.extend([
+            hl("CmpItemAbbr").fg(gray1),
+            hl("CmpItemAbbrMatch").fg(blue1).bold(),
+            hl("CmpItemAbbrMatchFuzzy").fg(blue2),
+            hl("CmpItemKind").fg(magenta1),
+            hl("CmpItemKindConstant").link("Constant"),
+            hl("CmpItemKindEnum").link("Type"),
+            hl("CmpItemKindFunction").link("Function"),
+            hl("CmpItemKindInterface").link("Type"),
+            hl("CmpItemKindKeyword").link("Constant"),
+            hl("CmpItemKindMethod").link("Function"),
+            hl("CmpItemKindStruct").link("Type"),
+            hl("CmpItemKindText").link("Comment"),
+        ]);
+    }
 
-    r
+    t
 }

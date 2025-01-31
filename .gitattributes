@@ -1,1 +1,4 @@
-/colors/robot.vim linguist-generated
+/autoload/robot/dark.vim linguist-generated
+/autoload/robot/light.vim linguist-generated
+/lua/robot/dark.lua linguist-generated
+/lua/robot/light.lua linguist-generated
