@@ -1,4 +1,4 @@
-use palette::{FromColor, Mix, Oklch, Srgb, WithHue};
+use palette::{FromColor, Oklch, Srgb, WithHue};
 
 use vim_robot::Highlight;
 
@@ -141,15 +141,15 @@ fn get_highlights<'a>(light: bool) -> Vec<Highlight<'a>> {
     ]);
 
     // floating window
-    let float_bg = bg.mix(fg, 0.04);
-    let floatborder_bg = bg.mix(float_bg, 0.55);
-    let floatborder_fg = floatborder_bg.mix(fg, 0.4);
+    let float_bg = mix(bg, fg, 0.04);
+    let floatborder_bg = mix(bg, float_bg, 0.55);
+    let floatborder_fg = mix(floatborder_bg, fg, 0.4);
     r.extend([
         hl("NormalFloat").bg(float_bg),
         hl("FloatBorder").bg(floatborder_bg).fg(floatborder_fg),
         hl("FloatTitle")
-            .bg(floatborder_bg.mix(float_bg, 0.57))
-            .fg(floatborder_fg.mix(blue1, 0.2))
+            .bg(mix(floatborder_bg, float_bg, 0.57))
+            .fg(mix(floatborder_fg, blue1, 0.2))
             .bold(),
         hl("Pmenu").link("NormalFloat"),
         hl("PmenuSel").link("Visual"),

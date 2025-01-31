@@ -39,7 +39,7 @@ hi! link Question MoreMsg
 hi! ModeMsg guifg=#8290ac ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! NormalFloat guifg=NONE ctermfg=NONE guibg=#eeeff2 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
 hi! FloatBorder guifg=#b3bccc ctermfg=250 guibg=#f1f2f3 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
-hi! FloatTitle guifg=#9eb1d0 ctermfg=146 guibg=#eff0f2 ctermbg=255 guisp=NONE gui=bold cterm=bold
+hi! FloatTitle guifg=#9bb2d0 ctermfg=146 guibg=#eff0f2 ctermbg=255 guisp=NONE gui=bold cterm=bold
 hi! link Pmenu NormalFloat
 hi! link PmenuSel Visual
 hi! Error guifg=#cd5859 ctermfg=167 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
@@ -143,7 +143,7 @@ hi! link Question MoreMsg
 hi! ModeMsg guifg=#8691a6 ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! NormalFloat guifg=NONE ctermfg=NONE guibg=#252c38 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
 hi! FloatBorder guifg=#575f70 ctermfg=59 guibg=#232935 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
-hi! FloatTitle guifg=#5a6c8b ctermfg=60 guibg=#242b37 ctermbg=235 guisp=NONE gui=bold cterm=bold
+hi! FloatTitle guifg=#586d8a ctermfg=60 guibg=#242b37 ctermbg=235 guisp=NONE gui=bold cterm=bold
 hi! link Pmenu NormalFloat
 hi! link PmenuSel Visual
 hi! Error guifg=#ef7675 ctermfg=210 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
