@@ -2,6 +2,22 @@
 
 Vim colorscheme
 
+## Usage
+
+- Vim
+
+  ```vim
+  colorscheme robot
+  ```
+
+- Neovim (Lua)
+
+  ```lua
+  vim.cmd.colorscheme('robot')
+  -- or
+  require('robot').setup()
+  ```
+
 ## License
 
-[MIT](./LICENSE)
+This repository is licensed under the [MIT license](./LICENSE).
