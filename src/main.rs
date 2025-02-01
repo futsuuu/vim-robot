@@ -133,14 +133,15 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
 
     // floating window
     let float_bg = mix(bg, fg, 0.04);
-    let floatborder_bg = mix(bg, float_bg, 0.55);
-    let floatborder_fg = mix(floatborder_bg, fg, 0.4);
+    let floatborder_bg = mix(bg, float_bg, 0.6);
     t.extend([
         hl("NormalFloat").bg(float_bg),
-        hl("FloatBorder").bg(floatborder_bg).fg(floatborder_fg),
+        hl("FloatBorder")
+            .bg(floatborder_bg)
+            .fg(mix(floatborder_bg, fg, 0.4)),
         hl("FloatTitle")
             .bg(mix(floatborder_bg, float_bg, 0.57))
-            .fg(mix(floatborder_fg, blue1, 0.2))
+            .fg(gray3)
             .bold(),
         hl("Pmenu").link("NormalFloat"),
         hl("PmenuSel").link("Visual"),

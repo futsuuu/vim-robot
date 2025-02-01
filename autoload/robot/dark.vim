@@ -31,8 +31,8 @@ hi! MoreMsg guifg=#76a5d7 ctermfg=110 guibg=NONE ctermbg=NONE guisp=NONE gui=NON
 hi! link Question MoreMsg
 hi! ModeMsg guifg=#8691a6 ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! NormalFloat guifg=NONE ctermfg=NONE guibg=#252c38 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
-hi! FloatBorder guifg=#575f70 ctermfg=59 guibg=#232935 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
-hi! FloatTitle guifg=#586d8a ctermfg=60 guibg=#242b37 ctermbg=235 guisp=NONE gui=bold cterm=bold
+hi! FloatBorder guifg=#575f70 ctermfg=59 guibg=#232a36 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
+hi! FloatTitle guifg=#6c7588 ctermfg=243 guibg=#242b37 ctermbg=235 guisp=NONE gui=bold cterm=bold
 hi! link Pmenu NormalFloat
 hi! link PmenuSel Visual
 hi! Error guifg=#ef7675 ctermfg=210 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
