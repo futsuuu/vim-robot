@@ -14,8 +14,6 @@ Vim colorscheme
 
   ```lua
   vim.cmd.colorscheme('robot')
-  -- or
-  require('robot').setup()
   ```
 
 ## License
