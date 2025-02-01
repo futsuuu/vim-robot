@@ -2,6 +2,18 @@
 
 Vim colorscheme
 
+## Installation
+
+You can install with builtin Vim packages, your favorite plugin manager, or manually add to runtimepath.
+
+> For copy and paste:
+> ```lua
+> 'futsuuu/vim-robot'
+> ```
+> ```lua
+> 'https://github.com/futsuuu/vim-robot'
+> ```
+
 ## Usage
 
 - Vim
