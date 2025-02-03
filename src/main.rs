@@ -87,7 +87,7 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
     let magenta1 = red1.with_hue(294.);
     let magenta2 = red2.with_hue(294.);
 
-    // syntax highlight
+    // syntax
     t.extend([
         hl("Comment").fg(gray3),
         hl("String").fg(green1),
@@ -217,24 +217,36 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
     if neovim {
         // tree-sitter
         t.extend([
+            hl("@variable").fg(fg),
+            hl("@property").fg(magenta1),
+
+            hl("@string.special.url").fg(blue1).underline(),
+            hl("@markup.link").fg(blue1),
+            hl("@markup.link.label").fg(blue1).underdashed(),
+            hl("@markup.quote").fg(gray2),
+            hl("@markup.raw").fg(magenta2),
+
             hl("@attribute.builtin").link("@attribute"),
             hl("@constant.builtin").link("@constant"),
             hl("@function.builtin").link("@function"),
             hl("@type.builtin").link("@type"),
-            hl("@property").fg(magenta1),
-            hl("@variable").fg(fg),
-            hl("@variable.member").link("@property"),
-            hl("@keyword.vim").link("Function"),
-            hl("@keyword.exception").fg(gray2),
-            hl("@keyword.conditional.ternary").fg(gray2),
-            hl("@constructor").link("Function"),
-            hl("@constructor.lua").link("Delimiter"),
-            hl("@string.special.url").fg(blue1).underline(),
-            hl("@markup.link").fg(blue1),
-            hl("@markup.link.label").fg(blue1).underdashed(),
+
+            hl("@constructor").link("@function"),
+            hl("@keyword.conditional.ternary").link("@operator"),
             hl("@markup.link.url").link("@string.special.url"),
-            hl("@markup.quote").fg(gray2),
-            hl("@markup.raw").fg(magenta2),
+            hl("@variable.member").link("@property"),
+
+            hl("@attribute.python").link("@function"),
+            hl("@constructor.lua").link("@punctuation"),
+            hl("@keyword.vim").link("@function"),
+        ]);
+
+        // semantic tokens
+        t.extend([
+            hl("@lsp.type.decorator").link("@lsp.type.function"),
+            hl("@lsp.type.enumMember").link("@lsp.type.property"),
+            hl("@lsp.type.macro").link("@function.macro"),
+            hl("@lsp.type.typeAlias").link("@lsp.type.type"),
         ]);
 
         // telescope.nvim
