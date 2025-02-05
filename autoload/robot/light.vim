@@ -53,6 +53,10 @@ hi! DiagnosticVirtualTextHint guifg=#2f86d9 ctermfg=68 guibg=#e4ebf4 ctermbg=255
 hi! DiagnosticVirtualTextInfo guifg=#009ca2 ctermfg=37 guibg=#e0edee ctermbg=255 guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticVirtualTextWarn guifg=#ae7800 ctermfg=136 guibg=#eeeae1 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
 hi! DiagnosticVirtualTextError guifg=#cd5859 ctermfg=167 guibg=#f3e7e7 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
+hi! link SpellLocal DiagnosticUnderlineHint
+hi! link SpellRare DiagnosticUnderlineInfo
+hi! link SpellCap DiagnosticUnderlineWarn
+hi! link SpellBad DiagnosticUnderlineError
 hi! MatchParen guifg=#5d6f92 ctermfg=60 guibg=#e1e4ea ctermbg=254 guisp=NONE gui=bold cterm=bold
 hi! Added guifg=#609426 ctermfg=65 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! Removed guifg=#cd5859 ctermfg=167 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE

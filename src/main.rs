@@ -182,6 +182,10 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
         hl("DiagnosticVirtualTextError")
             .fg(error)
             .bg(mix(bg, error, a_diag_vt)),
+        hl("SpellLocal").link("DiagnosticUnderlineHint"),
+        hl("SpellRare").link("DiagnosticUnderlineInfo"),
+        hl("SpellCap").link("DiagnosticUnderlineWarn"),
+        hl("SpellBad").link("DiagnosticUnderlineError"),
     ]);
 
     // match word
