@@ -214,28 +214,40 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
         ]);
     }
 
+    // language
+    t.extend([
+        hl("gitcommitHeader").link("Title"),
+        hl("gitcommitSummary").link("Title"),
+        hl("diffLine").link("Comment"),
+        hl("diffSubname").link("Title"),
+        hl("diffNewFile").link("Added"),
+        hl("diffOldFile").link("Removed"),
+        hl("diffIndexLine").link("Comment"),
+    ]);
+
     if neovim {
         // tree-sitter
         t.extend([
+            // set base
             hl("@variable").fg(fg),
             hl("@property").fg(magenta1),
-
+            // markup
             hl("@string.special.url").fg(blue1).underline(),
             hl("@markup.link").fg(blue1),
             hl("@markup.link.label").fg(blue1).underdashed(),
             hl("@markup.quote").fg(gray2),
             hl("@markup.raw").fg(magenta2),
-
+            // disable builtin
             hl("@attribute.builtin").link("@attribute"),
             hl("@constant.builtin").link("@constant"),
             hl("@function.builtin").link("@function"),
             hl("@type.builtin").link("@type"),
-
+            // override links
             hl("@constructor").link("@function"),
             hl("@keyword.conditional.ternary").link("@operator"),
             hl("@markup.link.url").link("@string.special.url"),
             hl("@variable.member").link("@property"),
-
+            // language-specific
             hl("@attribute.python").link("@function"),
             hl("@constructor.lua").link("@punctuation"),
             hl("@keyword.vim").link("@function"),
