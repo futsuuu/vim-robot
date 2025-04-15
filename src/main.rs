@@ -119,7 +119,11 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
         hl("Whitespace").fg(gray4),
         hl("CursorLine").bg(mix(bg, fg, a_cursorline)),
         hl("CursorColumn").link("CursorLine"),
-        hl("StatusLine").fg(gray1).bg(bg),
+        hl("StatusLine").fg(fg).bg(gray4),
+        hl("StatusLineNC").fg(gray2).bg(gray4),
+        hl("TabLine").bg(mix(bg, blue1, 0.15)),
+        hl("TabLineFill").link("TabLine"),
+        hl("TabLineSel").link("Normal"),
         hl("WinBar").fg(gray1).bg(bg),
         hl("WinSeparator").fg(gray4),
         hl("Visual").bg(mix(bg, blue2, a_visual)),
@@ -129,6 +133,7 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
         hl("MoreMsg").fg(blue2),
         hl("Question").link("MoreMsg"),
         hl("ModeMsg").fg(gray2),
+        hl("NonText").fg(gray4),
     ]);
 
     // floating window
@@ -145,6 +150,7 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
             .bold(),
         hl("Pmenu").link("NormalFloat"),
         hl("PmenuSel").link("Visual"),
+        hl("PmenuThumb").bg(gray3),
     ]);
 
     // diagnostics

@@ -20,7 +20,11 @@ hi! CursorLineNr guifg=#6c7588 ctermfg=243 guibg=NONE ctermbg=NONE guisp=NONE gu
 hi! Whitespace guifg=#3a414f ctermfg=238 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! CursorLine guifg=NONE ctermfg=NONE guibg=#272d39 ctermbg=236 guisp=NONE gui=NONE cterm=NONE
 hi! link CursorColumn CursorLine
-hi! StatusLine guifg=#96a1b7 ctermfg=109 guibg=#202632 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
+hi! StatusLine guifg=#afbbd3 ctermfg=146 guibg=#3a414f ctermbg=238 guisp=NONE gui=NONE cterm=NONE
+hi! StatusLineNC guifg=#8691a6 ctermfg=103 guibg=#3a414f ctermbg=238 guisp=NONE gui=NONE cterm=NONE
+hi! TabLine guifg=NONE ctermfg=NONE guibg=#29384d ctermbg=237 guisp=NONE gui=NONE cterm=NONE
+hi! link TabLineFill TabLine
+hi! link TabLineSel Normal
 hi! WinBar guifg=#96a1b7 ctermfg=109 guibg=#202632 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
 hi! WinSeparator guifg=#3a414f ctermfg=238 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! Visual guifg=NONE ctermfg=NONE guibg=#2d384a ctermbg=237 guisp=NONE gui=NONE cterm=NONE
@@ -30,11 +34,13 @@ hi! Directory guifg=#76a5d7 ctermfg=110 guibg=NONE ctermbg=NONE guisp=NONE gui=N
 hi! MoreMsg guifg=#76a5d7 ctermfg=110 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! link Question MoreMsg
 hi! ModeMsg guifg=#8691a6 ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! NonText guifg=#3a414f ctermfg=238 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! NormalFloat guifg=NONE ctermfg=NONE guibg=#252c38 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
 hi! FloatBorder guifg=#575f70 ctermfg=59 guibg=#232a36 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
 hi! FloatTitle guifg=#6c7588 ctermfg=243 guibg=#242b37 ctermbg=235 guisp=NONE gui=bold cterm=bold
 hi! link Pmenu NormalFloat
 hi! link PmenuSel Visual
+hi! PmenuThumb guifg=NONE ctermfg=NONE guibg=#6c7588 ctermbg=243 guisp=NONE gui=NONE cterm=NONE
 hi! Error guifg=#ef7675 ctermfg=210 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
 hi! ErrorMsg guifg=#ef7675 ctermfg=210 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
 hi! WarningMsg guifg=#cd9600 ctermfg=172 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
