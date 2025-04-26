@@ -144,6 +144,7 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
         hl("TabLineFill").link("TabLine"),
         hl("TabLineSel").link("Normal"),
         hl("WinBar").fg(gray1).bg(bg),
+        hl("WinBarNC").link("WinBar"),
         hl("WinSeparator").fg(gray4),
         hl("Visual").bg(mix(bg, blue2, a_visual)),
         hl("Search").bg(mix(bg, blue1, a_search)),

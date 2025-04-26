@@ -26,6 +26,7 @@ hi! TabLine guifg=NONE ctermfg=NONE guibg=#29384d ctermbg=237 guisp=NONE gui=NON
 hi! link TabLineFill TabLine
 hi! link TabLineSel Normal
 hi! WinBar guifg=#96a1b7 ctermfg=109 guibg=#202632 ctermbg=235 guisp=NONE gui=NONE cterm=NONE
+hi! link WinBarNC WinBar
 hi! WinSeparator guifg=#3a414f ctermfg=238 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! Visual guifg=NONE ctermfg=NONE guibg=#2d384a ctermbg=237 guisp=NONE gui=NONE cterm=NONE
 hi! Search guifg=NONE ctermfg=NONE guibg=#2f4765 ctermbg=238 guisp=NONE gui=NONE cterm=NONE

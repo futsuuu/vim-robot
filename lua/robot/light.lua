@@ -26,6 +26,7 @@ vim.api.nvim_set_hl(0, 'TabLine', { force = true, bg = '#d8e5f3', ctermbg = 254 
 vim.api.nvim_set_hl(0, 'TabLineFill', { force = true, link = 'TabLine' })
 vim.api.nvim_set_hl(0, 'TabLineSel', { force = true, link = 'Normal' })
 vim.api.nvim_set_hl(0, 'WinBar', { force = true, fg = '#7383a2', ctermfg = 103, bg = '#f5f5f6', ctermbg = 255 })
+vim.api.nvim_set_hl(0, 'WinBarNC', { force = true, link = 'WinBar' })
 vim.api.nvim_set_hl(0, 'WinSeparator', { force = true, fg = '#d4d9e2', ctermfg = 253 })
 vim.api.nvim_set_hl(0, 'Visual', { force = true, bg = '#dbe3ec', ctermbg = 254 })
 vim.api.nvim_set_hl(0, 'Search', { force = true, bg = '#c0d7f0', ctermbg = 153 })
