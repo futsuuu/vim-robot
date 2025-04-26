@@ -87,6 +87,25 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
     let magenta1 = red1.with_hue(294.);
     let magenta2 = red2.with_hue(294.);
 
+    t.set_terminal_colors([
+        bg,
+        red1,
+        green1,
+        yellow1,
+        blue1,
+        magenta1,
+        cyan1,
+        fg,
+        bg,
+        red1,
+        green1,
+        yellow1,
+        blue1,
+        magenta1,
+        cyan1,
+        fg,
+    ]);
+
     // syntax
     t.extend([
         hl("Comment").fg(gray3),

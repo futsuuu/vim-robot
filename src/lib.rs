@@ -4,6 +4,7 @@ pub struct Theme<'a> {
     light: bool,
     neovim: bool,
     highlights: Vec<crate::Highlight<'a>>,
+    terminal_colors: Option<[Oklch; 16]>,
 }
 
 impl Theme<'_> {
@@ -12,7 +13,12 @@ impl Theme<'_> {
             light,
             neovim,
             highlights: Vec::new(),
+            terminal_colors: None,
         }
+    }
+
+    pub fn set_terminal_colors(&mut self, cs: [Oklch; 16]) {
+        self.terminal_colors = Some(cs);
     }
 }
 
@@ -35,6 +41,11 @@ impl std::fmt::Display for Theme<'_> {
             for h in &self.highlights {
                 writeln!(f, "{}", h.display(true))?;
             }
+            if let Some(cs) = self.terminal_colors {
+                for (i, c) in cs.into_iter().enumerate() {
+                    writeln!(f, "vim.api.nvim_set_var('terminal_color_{i}', '{}')", to_hex(c))?;
+                }
+            }
             writeln!(f, "end }}")?;
         } else {
             writeln!(
@@ -44,6 +55,16 @@ impl std::fmt::Display for Theme<'_> {
             )?;
             for h in &self.highlights {
                 writeln!(f, "{}", h.display(false))?;
+            }
+            if let Some(cs) = self.terminal_colors {
+                write!(f, "let g:terminal_ansi_colors = [")?;
+                for (i, c) in cs.into_iter().enumerate() {
+                    if 0 < i {
+                        write!(f, ", ")?;
+                    }
+                    write!(f, "'{}'", to_hex(c))?;
+                }
+                writeln!(f, "]")?;
             }
             writeln!(f, "endf")?;
         }

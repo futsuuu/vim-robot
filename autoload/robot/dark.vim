@@ -77,4 +77,5 @@ hi! link diffSubname Title
 hi! link diffNewFile Added
 hi! link diffOldFile Removed
 hi! link diffIndexLine Comment
+let g:terminal_ansi_colors = ['#202632', '#ef7675', '#7db349', '#cd9600', '#50a5fa', '#a68cf4', '#00bcc0', '#afbbd3', '#202632', '#ef7675', '#7db349', '#cd9600', '#50a5fa', '#a68cf4', '#00bcc0', '#afbbd3']
 endf
