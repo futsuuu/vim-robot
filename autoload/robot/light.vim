@@ -24,8 +24,8 @@ hi! StatusLine guifg=#5d6f92 ctermfg=60 guibg=#d4d9e2 ctermbg=253 guisp=NONE gui
 hi! StatusLineNC guifg=#8290ac ctermfg=103 guibg=#d4d9e2 ctermbg=253 guisp=NONE gui=NONE cterm=NONE
 hi! TabLine guifg=NONE ctermfg=NONE guibg=#d8e5f3 ctermbg=254 guisp=NONE gui=NONE cterm=NONE
 hi! link TabLineFill TabLine
-hi! link TabLineSel Normal
-hi! WinBar guifg=#7383a2 ctermfg=103 guibg=#f5f5f6 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
+hi! TabLineSel guifg=#5d6f92 ctermfg=60 guibg=#f5f5f6 ctermbg=255 guisp=NONE gui=bold,italic cterm=bold,italic
+hi! WinBar guifg=#9da8be ctermfg=248 guibg=#f5f5f6 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
 hi! link WinBarNC WinBar
 hi! WinSeparator guifg=#d4d9e2 ctermfg=253 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! Visual guifg=NONE ctermfg=NONE guibg=#dbe3ec ctermbg=254 guisp=NONE gui=NONE cterm=NONE
