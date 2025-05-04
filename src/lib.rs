@@ -43,7 +43,11 @@ impl std::fmt::Display for Theme<'_> {
             }
             if let Some(cs) = self.terminal_colors {
                 for (i, c) in cs.into_iter().enumerate() {
-                    writeln!(f, "vim.api.nvim_set_var('terminal_color_{i}', '{}')", to_hex(c))?;
+                    writeln!(
+                        f,
+                        "vim.api.nvim_set_var('terminal_color_{i}', '{}')",
+                        to_hex(c)
+                    )?;
                 }
             }
             writeln!(f, "end }}")?;

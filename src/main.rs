@@ -30,7 +30,7 @@ fn hl(name: &str) -> Highlight {
 }
 
 fn mix(base: Oklch, other: Oklch, alpha: f32) -> Oklch {
-    use palette::{blend::Compose, Oklab, WithAlpha};
+    use palette::{Oklab, WithAlpha, blend::Compose};
     let base = Oklab::from_color(base);
     let other = Oklab::from_color(other);
     Oklch::from_color(other.with_alpha(alpha).over(base.opaque()).color)
@@ -87,6 +87,7 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
     let magenta1 = red1.with_hue(294.);
     let magenta2 = red2.with_hue(294.);
 
+    #[rustfmt::skip]
     t.set_terminal_colors([
         bg,
         red1,
