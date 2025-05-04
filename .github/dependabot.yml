@@ -3,8 +3,16 @@ version: 2
 updates:
   - package-ecosystem: cargo
     groups:
-      deps:
-        patterns: ["*"]
-    directory: "/"
+      rust:
+        patterns: ['*']
+    directory: '/'
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: github-actions
+    groups:
+      gha:
+        patterns: ['*']
+    directory: '/'
     schedule:
       interval: monthly
