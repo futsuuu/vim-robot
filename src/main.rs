@@ -233,6 +233,7 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
         hl("DiffAdd").bg(mix(bg, green1, 0.15)),
         hl("DiffDelete").bg(mix(bg, red1, 0.15)),
         hl("DiffChange").bg(mix(bg, blue1, 0.15)),
+        hl("DiffText").bg(mix(bg, blue1, 0.3)),
     ]);
     if neovim {
         t.extend([

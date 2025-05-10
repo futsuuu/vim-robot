@@ -71,6 +71,7 @@ hi! Changed guifg=#2f86d9 ctermfg=68 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE
 hi! DiffAdd guifg=NONE ctermfg=NONE guibg=#dde7d8 ctermbg=254 guisp=NONE gui=NONE cterm=NONE
 hi! DiffDelete guifg=NONE ctermfg=NONE guibg=#f2dedd ctermbg=224 guisp=NONE gui=NONE cterm=NONE
 hi! DiffChange guifg=NONE ctermfg=NONE guibg=#d8e5f3 ctermbg=254 guisp=NONE gui=NONE cterm=NONE
+hi! DiffText guifg=NONE ctermfg=NONE guibg=#bcd4ef ctermbg=153 guisp=NONE gui=NONE cterm=NONE
 hi! link gitcommitHeader Title
 hi! link gitcommitSummary Title
 hi! link diffLine Comment

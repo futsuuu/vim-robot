@@ -74,6 +74,7 @@ vim.api.nvim_set_hl(0, 'Changed', { force = true, fg = '#50a5fa', ctermfg = 75 }
 vim.api.nvim_set_hl(0, 'DiffAdd', { force = true, bg = '#2d3a39', ctermbg = 237 })
 vim.api.nvim_set_hl(0, 'DiffDelete', { force = true, bg = '#3d333d', ctermbg = 237 })
 vim.api.nvim_set_hl(0, 'DiffChange', { force = true, bg = '#29384d', ctermbg = 237 })
+vim.api.nvim_set_hl(0, 'DiffText', { force = true, bg = '#304969', ctermbg = 238 })
 vim.api.nvim_set_hl(0, 'GitSignsStagedAdd', { force = true, link = 'GitSignsAdd' })
 vim.api.nvim_set_hl(0, 'GitSignsStagedChange', { force = true, link = 'GitSignsChange' })
 vim.api.nvim_set_hl(0, 'GitSignsStagedDelete', { force = true, link = 'GitSignsDelete' })
