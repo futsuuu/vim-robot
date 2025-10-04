@@ -36,6 +36,7 @@ vim.api.nvim_set_hl(0, 'MoreMsg', { force = true, fg = '#76a5d7', ctermfg = 110 
 vim.api.nvim_set_hl(0, 'Question', { force = true, link = 'MoreMsg' })
 vim.api.nvim_set_hl(0, 'ModeMsg', { force = true, fg = '#8691a6', ctermfg = 103 })
 vim.api.nvim_set_hl(0, 'NonText', { force = true, fg = '#3a414f', ctermfg = 238 })
+vim.api.nvim_set_hl(0, 'QuickFixLine', { force = true, link = 'Title' })
 vim.api.nvim_set_hl(0, 'NormalFloat', { force = true, bg = '#252c38', ctermbg = 235 })
 vim.api.nvim_set_hl(0, 'FloatBorder', { force = true, fg = '#575f70', ctermfg = 59, bg = '#232a36', ctermbg = 235 })
 vim.api.nvim_set_hl(0, 'FloatTitle', { force = true, fg = '#6c7588', ctermfg = 243, bg = '#242b37', ctermbg = 235, bold = true })

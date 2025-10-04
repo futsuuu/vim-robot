@@ -36,6 +36,7 @@ hi! MoreMsg guifg=#5986b7 ctermfg=67 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE
 hi! link Question MoreMsg
 hi! ModeMsg guifg=#8290ac ctermfg=103 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! NonText guifg=#d4d9e2 ctermfg=253 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! link QuickFixLine Title
 hi! NormalFloat guifg=NONE ctermfg=NONE guibg=#eeeff2 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
 hi! FloatBorder guifg=#b3bbcc ctermfg=250 guibg=#f1f2f3 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
 hi! FloatTitle guifg=#9da8be ctermfg=248 guibg=#eff0f2 ctermbg=255 guisp=NONE gui=bold cterm=bold

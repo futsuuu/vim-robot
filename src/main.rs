@@ -25,7 +25,7 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 
-fn hl(name: &str) -> Highlight {
+fn hl(name: &str) -> Highlight<'_> {
     Highlight::new(name)
 }
 
@@ -155,6 +155,7 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
         hl("Question").link("MoreMsg"),
         hl("ModeMsg").fg(gray2),
         hl("NonText").fg(gray4),
+        hl("QuickFixLine").link("Title"),
     ]);
 
     // floating window
