@@ -136,7 +136,9 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
     t.extend([
         hl("LineNr").fg(gray4),
         hl("CursorLineNr").fg(gray3).bold(),
+        hl("SignColumn").fg(gray4),
         hl("Whitespace").fg(gray4),
+        hl("SpecialKey").fg(gray3),
         hl("CursorLine").bg(mix(bg, fg, a_cursorline)),
         hl("CursorColumn").link("CursorLine"),
         hl("StatusLine").fg(fg).bg(gray4),

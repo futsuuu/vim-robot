@@ -17,7 +17,9 @@ hi! Title guifg=#5986b7 ctermfg=67 guibg=NONE ctermbg=NONE guisp=NONE gui=bold c
 hi! Todo guifg=#f5f5f6 ctermfg=255 guibg=#009ca2 ctermbg=37 guisp=NONE gui=bold cterm=bold
 hi! LineNr guifg=#d4d9e2 ctermfg=253 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! CursorLineNr guifg=#9da8be ctermfg=248 guibg=NONE ctermbg=NONE guisp=NONE gui=bold cterm=bold
+hi! SignColumn guifg=#d4d9e2 ctermfg=253 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! Whitespace guifg=#d4d9e2 ctermfg=253 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! SpecialKey guifg=#9da8be ctermfg=248 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! CursorLine guifg=NONE ctermfg=NONE guibg=#eceef1 ctermbg=255 guisp=NONE gui=NONE cterm=NONE
 hi! link CursorColumn CursorLine
 hi! StatusLine guifg=#5d6f92 ctermfg=60 guibg=#d4d9e2 ctermbg=253 guisp=NONE gui=NONE cterm=NONE
