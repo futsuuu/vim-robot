@@ -68,9 +68,9 @@ hi! link SpellRare DiagnosticUnderlineInfo
 hi! link SpellCap DiagnosticUnderlineWarn
 hi! link SpellBad DiagnosticUnderlineError
 hi! MatchParen guifg=#afbbd3 ctermfg=146 guibg=#2f3643 ctermbg=236 guisp=NONE gui=bold cterm=bold
-hi! Added guifg=#7db349 ctermfg=107 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
-hi! Removed guifg=#ef7675 ctermfg=210 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
-hi! Changed guifg=#50a5fa ctermfg=75 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! Added guifg=#659149 ctermfg=65 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! Removed guifg=#bc6466 ctermfg=131 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
+hi! Changed guifg=#4685c8 ctermfg=68 guibg=NONE ctermbg=NONE guisp=NONE gui=NONE cterm=NONE
 hi! DiffAdd guifg=NONE ctermfg=NONE guibg=#2d3a39 ctermbg=237 guisp=NONE gui=NONE cterm=NONE
 hi! DiffDelete guifg=NONE ctermfg=NONE guibg=#3d333d ctermbg=237 guisp=NONE gui=NONE cterm=NONE
 hi! DiffChange guifg=NONE ctermfg=NONE guibg=#29384d ctermbg=237 guisp=NONE gui=NONE cterm=NONE

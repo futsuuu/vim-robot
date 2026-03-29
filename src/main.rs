@@ -230,9 +230,9 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
 
     // diff
     t.extend([
-        hl("Added").fg(green1),
-        hl("Removed").fg(red1),
-        hl("Changed").fg(blue1),
+        hl("Added").fg(mix(bg, green1, 0.77)),
+        hl("Removed").fg(mix(bg, red1, 0.77)),
+        hl("Changed").fg(mix(bg, blue1, 0.77)),
         hl("DiffAdd").bg(mix(bg, green1, 0.15)),
         hl("DiffDelete").bg(mix(bg, red1, 0.15)),
         hl("DiffChange").bg(mix(bg, blue1, 0.15)),
