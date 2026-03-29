@@ -240,9 +240,6 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
     ]);
     if neovim {
         t.extend([
-            hl("GitSignsStagedAdd").link("GitSignsAdd"),
-            hl("GitSignsStagedChange").link("GitSignsChange"),
-            hl("GitSignsStagedDelete").link("GitSignsDelete"),
             hl("GitSignsAddInline").bg(mix(bg, green1, 0.3)),
             hl("GitSignsDeleteInline").bg(mix(bg, red1, 0.3)),
             hl("GitSignsChangeInline").bg(mix(bg, green1, 0.3)),
