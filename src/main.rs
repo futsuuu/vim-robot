@@ -269,20 +269,25 @@ fn create_theme<'a>(light: bool, neovim: bool) -> Theme<'a> {
             hl("@markup.link.label").fg(blue1).underdashed(),
             hl("@markup.quote").fg(gray2),
             hl("@markup.raw").fg(magenta2),
-            // disable builtin
+            // disable builtin/special
             hl("@attribute.builtin").link("@attribute"),
             hl("@constant.builtin").link("@constant"),
             hl("@function.builtin").link("@function"),
+            hl("@punctuation.special").link("@punctuation"), // e.g. markdown table frame
             hl("@type.builtin").link("@type"),
             // override links
             hl("@constructor").link("@function"),
             hl("@keyword.conditional.ternary").link("@operator"),
             hl("@markup.link.url").link("@string.special.url"),
+            hl("@tag.delimiter").link("Delimiter"),
+            hl("@tag.attribute").link("@property"),
             hl("@variable.member").link("@property"),
             // language-specific
             hl("@attribute.python").link("@function"),
             hl("@constructor.lua").link("@punctuation"),
             hl("@keyword.vim").link("@function"),
+            hl("@tag.jsx").link("@function"), // HTML tags are highlighted as '@tag.builtin.jsx'
+            hl("@tag.tsx").link("@tag.jsx"),
         ]);
 
         // semantic tokens
